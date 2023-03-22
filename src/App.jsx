@@ -4,7 +4,32 @@ import { FaChevronLeft, FaChevronRight, FaQuoteRight } from 'react-icons/fa'
 function App() {
   const [index, setIndex] = useState(0)
   const { name, job, image, text } = people[index]
-  console.log(name)
+
+  console.log(people.length)
+  console.log(people[index])
+  console.log(index)
+
+  const nextPerson = () => {
+    setIndex((currentIndex) => {
+      const newIndex = currentIndex + 1
+      if (newIndex < people.length) {
+        return newIndex
+      } else {
+        return 0
+      }
+    })
+  }
+
+  const prevPerson = () => {
+    setIndex((currentIndex) => {
+      const newIndex = currentIndex - 1
+      if (newIndex < 0) {
+        return people.length - 1
+      } else {
+        return newIndex
+      }
+    })
+  }
 
   return (
     <main>
@@ -18,6 +43,14 @@ function App() {
         <h4 className="author">{name}</h4>
         <p className="job">{job}</p>
         <p className="info">{text}</p>
+        <div className="btn-container">
+          <button className="prev-btn" onClick={prevPerson}>
+            <FaChevronLeft />
+          </button>
+          <button className="next-btn" onClick={nextPerson}>
+            <FaChevronRight />
+          </button>
+        </div>
       </article>
     </main>
   )
