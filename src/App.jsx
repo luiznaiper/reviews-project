@@ -5,10 +5,6 @@ function App() {
   const [index, setIndex] = useState(0)
   const { name, job, image, text } = people[index]
 
-  console.log(people.length)
-  console.log(people[index])
-  console.log(index)
-
   const nextPerson = () => {
     setIndex((currentIndex) => {
       const newIndex = currentIndex + 1
@@ -31,6 +27,16 @@ function App() {
     })
   }
 
+  const randomize = () => {
+    let random = Math.floor(people.length * Math.random())
+    if (random === index && random < people.length - 1) {
+      random = index + 1
+    } else if (random === index && random > 0) {
+      random = index - 1
+    }
+    setIndex(random)
+  }
+
   return (
     <main>
       <article className="review">
@@ -51,6 +57,9 @@ function App() {
             <FaChevronRight />
           </button>
         </div>
+        <button className="btn btn-hipster" onClick={randomize}>
+          Randomize
+        </button>
       </article>
     </main>
   )
